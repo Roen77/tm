@@ -19,6 +19,7 @@
         border: 5px solid palevioletred;
         box-sizing: border-box;
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100); /* [4] */
       }
       .box {
         height: 50px;
@@ -28,11 +29,22 @@
   </head>
   <body>
     <div class="container">
-      <div class="box">change</div>
+      <div class="box">change height:<span class="hh"></span></div>
       <!-- <div class="box"></div>
       <div class="box"></div>
       <div class="box"></div>
       <div class="box"></div> -->
     </div>
   </body>
+  <script>
+    const vh = window.innerHeight * 0.01; // [1]
+    document.documentElement.style.setProperty("--vh", `${vh}px`); // [2]
+
+    window.addEventListener("resize", () => {
+      console.log("resize");
+      const vh = window.innerHeight * 0.01;
+      document.querySelector(".hh").textContent = vh;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    });
+  </script>
 </html>
